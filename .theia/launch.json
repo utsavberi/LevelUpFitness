@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - RestServiceApplication",
+      "request": "launch",
+      "mainClass": "com.example.restservice.RestServiceApplication",
+      "projectName": "rest-service"
+    }
+  ]
+}
