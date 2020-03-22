@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>Exersice List</title>
+    <link rel="stylesheet" th:href="@{/style.css}"></link>
+</head>
+<body>
+<h2>Exercise List</h2>
+<div th:unless="${#lists.isEmpty(exercises)}">
+    <dl th:each="exercise : ${exercises}">
+        <dt class="exerciseHeadline">
+            <span th:text="${exercise.name}"></span> by
+            <span th:text="${exercise.pointsPerRepPerLbs}"></span>
+            (<span th:text="${exercise.id}"></span>)
+        </dt>
+        <dd class="exerciseDescription">
+            <span th:if="${exercise.description}" th:text="${exercise.description}"></span>
+            <span th:if="${exercise.description eq null}"> No description available</span>
+        </dd>
+    </dl>
+</div>
+<div th:if="${#lists.isEmpty(exercises)}">
+    <p>You have no exercises...</p>
+</div>
+<hr/>
+<h3>Add an Exercise</h3>
+<form method="POST">
+    <label for="title">Name:</label>
+    <input type="text" name="name" size="50"></input><br/>
+
+    <label for="pointsPerRepPerLbs">pointsPerRepPerLbs:</label>
+    <input type="text" name="pointsPerRepPerLbs" size="15"></input><br/>
+    <label for="description">Description:</label><br/>
+    <textarea name="description" cols="80" rows="5">
+</textarea><br/>
+    <input type="submit"></input>
+</form>
+</body>
+</html>
