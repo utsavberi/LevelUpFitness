@@ -1,9 +1,7 @@
 package com.utsavberi.levelUpFitness;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Exercise {
@@ -11,9 +9,29 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Lob
     private String description;
     private String imageId;
-    private String pointsPerRepPerLbs;
+    private float pointsPerRepPerLbs;
+    @ManyToMany
+    private Set<Workout> workouts;
+
+    public Set<Workout> getWorkouts() {
+        return workouts;
+    }
+
+    public void setWorkouts(Set<Workout> workouts) {
+        this.workouts = workouts;
+    }
+
+    public Exercise() {
+    }
+
+    public Exercise(String name, String description, float pointsPerRepPerLbs) {
+        this.name = name;
+        this.description = description;
+        this.pointsPerRepPerLbs = pointsPerRepPerLbs;
+    }
 
     public Long getId() {
         return id;
@@ -47,11 +65,11 @@ public class Exercise {
         this.imageId = imageId;
     }
 
-    public String getPointsPerRepPerLbs() {
+    public float getPointsPerRepPerLbs() {
         return pointsPerRepPerLbs;
     }
 
-    public void setPointsPerRepPerLbs(String pointsPerRepPerLbs) {
+    public void setPointsPerRepPerLbs(float pointsPerRepPerLbs) {
         this.pointsPerRepPerLbs = pointsPerRepPerLbs;
     }
 }
