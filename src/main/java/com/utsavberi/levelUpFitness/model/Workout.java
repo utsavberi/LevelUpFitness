@@ -1,4 +1,6 @@
-package com.utsavberi.levelUpFitness;
+package com.utsavberi.levelUpFitness.model;
+
+import com.utsavberi.levelUpFitness.model.Exercise;
 
 import javax.persistence.*;
 import java.util.Set;

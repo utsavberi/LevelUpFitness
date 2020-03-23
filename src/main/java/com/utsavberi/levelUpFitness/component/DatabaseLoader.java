@@ -1,5 +1,9 @@
-package com.utsavberi.levelUpFitness;
+package com.utsavberi.levelUpFitness.component;
 
+import com.utsavberi.levelUpFitness.model.Exercise;
+import com.utsavberi.levelUpFitness.model.Workout;
+import com.utsavberi.levelUpFitness.repository.ExerciseRepository;
+import com.utsavberi.levelUpFitness.repository.WorkoutRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
