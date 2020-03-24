@@ -1,14 +1,14 @@
-body {
-    background-color: #cccccc;
-    font-family: arial,helvetica,sans-serif;
+.nav-link{
+    font-size:7px;
+    text-align: center;
 }
-.bookHeadline {
-    font-size: 12pt;
-    font-weight: bold;
+.workouts-card_image{
+    background-size: cover;
+    background-position: center;
 }
-.bookDescription {
-    font-size: 10pt;
-}
-label {
-    font-weight: bold;
+.sticky-bottom {
+    position: absolute;
+    bottom: 0;
+    z-index: 1020;
+    width: 100%;
 }
