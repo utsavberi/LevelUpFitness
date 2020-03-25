@@ -47,29 +47,20 @@ class WorkoutContainer extends React.Component {
         super(props);
         this.state = {
             started: false,
-            workoutLogs: {workout: props.workout},
             workoutExerciseLogs: []
         }
     }
 
     startWorkout = () => {
         this.setState((prevState) => ({
-            started: true,
-            workoutLogs: {
-                ...prevState.workoutLogs,
-                startDateTime: (new Date()).getTime()
-            }
+            started: true
         }));
     };
 
     workoutComplete = (workoutLog) => {
         this.setState((prevState) => ({
             completed: true,
-            workoutLogs: {
-                ...prevState.workoutLogs,
-                endDateTime: (new Date()).getTime()
-            },
-            www: workoutLog
+            workoutLog: workoutLog
         }));
     };
 
@@ -104,9 +95,6 @@ class Workout extends React.Component {
             currentWorkoutExercise: props.workout.workoutExercises[0],
             startDateTime: ticks(),
             workoutExerciseLogs: []
-            // workoutLog: {
-            //
-            // }
         }
     }
 
@@ -117,7 +105,7 @@ class Workout extends React.Component {
             startDateTime: ticks(),
             workoutExerciseLogs: []
         }));
-    }
+    };
 
     componentWillReceiveProps() {
         this.resetComponent();
@@ -127,34 +115,7 @@ class Workout extends React.Component {
         this.resetComponent()
     }
 
-    // nextExercise = (completedWorkoutExerciseLog) => {
-    //     if (this.state.i != this.props.workout.workoutExercises.length - 1) {
-    //         this.setState((prevState) => {
-    //             return {
-    //                 i: prevState.i + 1,
-    //                 currentWorkoutExercise: this.props.workout.workoutExercises[prevState.i + 1],
-    //                 workoutLog: {
-    //                     ...prevState.workoutLog,
-    //                     workoutExerciseLog: prevState.workoutLog.workoutExerciseLog.concat(completedWorkoutExerciseLog)
-    //                 }
-    //             };
-    //         }, () => {
-    //             if (this.state.i === this.props.workout.workoutExercises.length - 1) {
-    //
-    //             }
-    //         })
-    //     } else {
-    //         let workoutLog = {
-    //             ...this.state.workoutLog,
-    //             workoutExerciseLog: this.state.workoutLog.workoutExerciseLog.concat(completedWorkoutExerciseLog)
-    //         }
-    //         this.props.workoutComplete(workoutLog);
-    //     }
-    //
-    // };
-
     onExerciseComplete = (completedWorkoutExercise) => {
-        debugger;
         //completedWorkoutExercise was last exercise
         let nextExerciseNumber = this.state.exerciseNumber + 1
         let wasLastExerciseInWorkout = this.state.exerciseNumber === this.props.workout.workoutExercises.length - 1;
@@ -172,11 +133,6 @@ class Workout extends React.Component {
                 workoutExerciseLogs: prevState.workoutExerciseLogs.concat(completedWorkoutExercise)
             }));
         }
-        //if complete one was last exercise
-
-        //increment exercise number
-        // update currentWorkoutExercise++
-
     };
 
     render() {
@@ -197,16 +153,8 @@ class Exercise extends React.Component {
         this.state = {
             setNumber: 1,
             workoutExerciseSetLogs: [],
-            startDateTime: ticks()
-            // workoutExerciseLog: {
-            //     workoutExerciseSetLogs: [] //todo flatten 1 up
-            // },
-            // workoutExerciseSetLog: null//{
-            //     startDateTime: null,
-            //     endDateTime: null,
-            //     reps: null,
-            //     weight: 10
-            // }
+            startDateTime: ticks(),
+            isLastSet:false
         }
     }
 
@@ -214,9 +162,10 @@ class Exercise extends React.Component {
         this.setState(() => ({
             setNumber: 1,
             workoutExerciseSetLogs: [],
-            startDateTime: ticks()
+            startDateTime: ticks(),
+            isLastSet:false
         }));
-    }
+    };
 
     componentWillReceiveProps() {
         this.resetComponent();
@@ -226,106 +175,13 @@ class Exercise extends React.Component {
         this.resetComponent()
     }
 
-    // componentDidMount() {
-    //     console.log('set 1 ex 1 started', (new Date()).getTime());
-    //     this.logSetStart();
-    //
-    // }
-    //
-    // componentWillReceiveProps() {
-    //     this.setState(() => ({
-    //         setNumber: 1,
-    //         workoutExerciseLog: null,
-    //         workoutExerciseSetLog: null,
-    //         showTimer: false
-    //     }));
-    //     console.log('set started', (new Date()).getTime());
-    //     this.logSetStart();
-    //
-    // }
-    //
-    // logSetStart() {
-    //     this.setState(() => ({workoutExerciseSetLog: {startDateTime: (new Date()).getTime()}}));
-    // }
-    //
-    // logSetEnd(callback) {
-    //     debugger;
-    //     let workoutExerciseSetLog = {
-    //         ...this.state.workoutExerciseSetLog,
-    //         endDateTime: (new Date()).getTime(),
-    //         reps: this.props.workoutExercise.reps,
-    //         weight: 10
-    //     };
-    //     this.setState((prevState) => {
-    //         return {
-    //             workoutExerciseSetLog: null,
-    //             workoutExerciseLog: {
-    //                 ...prevState.workoutExerciseLog,
-    //                 workoutExerciseSetLogs: prevState.workoutExerciseLog ? prevState.workoutExerciseLog.workoutExerciseSetLogs.concat(workoutExerciseSetLog) : [workoutExerciseSetLog]
-    //             }
-    //         }
-    //     }, callback);
-    // }
-    //
-    // next = () => {
-    //     // let isLastSetOfCurrentExercise = this.state.setNumber === this.props.workoutExercise.sets;
-    //     // let isLastSetOfLastExercise = this.props.isLastExercise && isLastSetOfCurrentExercise;
-    //     // //show timer if if timer not showing and not last set of last exercise ( dont show timer on last set of last exercise)
-    //     // if (!this.state.showTimer && !(isLastSetOfLastExercise)) {
-    //     //     this.setState(() => ({showTimer: true}));
-    //     //     // console.log('set ended1', (new Date()).getTime());
-    //     //     this.logSetEnd();
-    //     //     return;
-    //     // }
-    //     //
-    //     //
-    //     // // if last set of current exercise and timer showing
-    //     // if (isLastSetOfCurrentExercise) {
-    //     //     this.setState(() => ({showTimer: false}));
-    //     //     console.log('set ended', (new Date()).getTime());
-    //     //     // this.logSetEnd(() => {
-    //     //     let workoutExerciseSetLog = {
-    //     //         ...this.state.workoutExerciseSetLog,
-    //     //         endDateTime: (new Date()).getTime(),
-    //     //         reps: this.props.workoutExercise.reps,
-    //     //         weight: 10
-    //     //     };
-    //     //     let workoutExerciseLog = {
-    //     //         exercise: this.props.workoutExercise.exercise,
-    //     //         workoutExerciseSetLogs: this.state.workoutExerciseLog.workoutExerciseSetLogs.concat(workoutExerciseSetLog)
-    //     //     };
-    //     //     this.props.nextExercise(workoutExerciseLog);
-    //     //     // });
-    //     //
-    //     //
-    //     // } else {
-    //     //     //if not last set and timer showing
-    //     //     console.log('set started', (new Date()).getTime());
-    //     //     this.logSetStart();
-    //     //     this.setState((prevState) => {
-    //     //         return {
-    //     //             showTimer: false,
-    //     //             setNumber: prevState.setNumber + 1
-    //     //         }
-    //     //     });
-    //     // }
-    //
-    //
-    // };
-
-
     onSetComplete = (workoutExerciseSet) => {
         let completedSetNumber = this.state.setNumber;
-        let wasLastSetForExerciseCompleted = completedSetNumber === this.props.workoutExercise.sets
-        let nextSetNumber = this.state.setNumber + 1
-        let isNextSetLastSetInExercise = (nextSetNumber === this.props.workoutExercise.sets)
-        // this.setState(() => ({
-        //     setNumber: nextSetNumber,
-        //     workoutExerciseSetLogs: this.state.workoutExerciseSetLogs.concat(workoutExerciseSet),
-        //     isLastSet: (isNextSetLastSetInExercise)
-        // }), () => {
+        let wasLastSetForExerciseCompleted = completedSetNumber === this.props.workoutExercise.sets;
+        let nextSetNumber = this.state.setNumber + 1;
+        let isNextSetLastSetInExercise = (nextSetNumber === this.props.workoutExercise.sets);
+
         if (wasLastSetForExerciseCompleted) {
-            debugger;
             this.props.onExerciseComplete({
                 workoutExerciseSetLogs: this.state.workoutExerciseSetLogs.concat(workoutExerciseSet),
                 exercise: this.props.workoutExercise.exercise,
@@ -339,12 +195,6 @@ class Exercise extends React.Component {
                 isLastSet: (isNextSetLastSetInExercise)
             }));
         }
-        // });
-
-
-        //store in this.state.workoutExerciseSets sets array
-        //is last set then call parent.exercisecomplete with exercise start time end time
-        //else increment state
     };
 
     render() {
@@ -390,7 +240,7 @@ class ExSet extends React.Component {
             showTimer: false,
             startDateTime: ticks()
         }));
-    }
+    };
 
     componentWillReceiveProps() {
         this.resetComponent();
@@ -407,7 +257,7 @@ class ExSet extends React.Component {
             startDateTime: this.state.startDateTime,
             endDateTime: ticks()
         });
-    }
+    };
     onNextSetButtonClick = () => {
         if (this.props.skipTimer) {
             this.onWorkoutExerciseSetComplete();
@@ -430,7 +280,6 @@ class ExSet extends React.Component {
 
     timerComponent = () => ((<TimerContainer
         startCountdownFrom={this.props.restInSeconds / 10}
-        // startCountdownFrom={1}
         timerElapsed={this.onTimerElapsed}
     />));
 
