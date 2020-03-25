@@ -7,9 +7,7 @@ import com.utsavberi.levelUpFitness.repository.WorkoutLogRepository;
 import com.utsavberi.levelUpFitness.repository.WorkoutRepository;
 import com.utsavberi.levelUpFitness.model.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class ApiController {
 
     @Autowired
     public ApiController(
-            WorkosutRepository workoutRepository,
+            WorkoutRepository workoutRepository,
             ExerciseRepository exerciseRepository,
             WorkoutLogRepository workoutLogRepository
     ) {
@@ -46,6 +44,13 @@ public class ApiController {
     @GetMapping("/workoutLogs")
     public List<WorkoutLog> workoutLog() {
         return workoutLogRepository.findAll();
+    }
+
+    @PostMapping("/test")
+    public String test(@RequestBody WorkoutLog workoutLog){
+int x = 1;
+workoutLogRepository.save(workoutLog);
+        return "done";
     }
 
 }
