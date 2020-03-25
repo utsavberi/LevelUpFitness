@@ -99,16 +99,22 @@ class Workout extends React.Component {
             workout: props.workout,
             i: 0,
             currentWorkoutExercise: props.workout.workoutExercises[0],
-            workoutLog: {}
+            workoutLog: {
+                workoutExerciseLog: []
+            }
         }
     }
 
-    nextExercise = () => {
+    nextExercise = (completedWorkoutExerciseLog) => {
         if (this.state.i != this.props.workout.workoutExercises.length - 1) {
             this.setState((prevState) => {
                 return {
                     i: prevState.i + 1,
-                    currentWorkoutExercise: this.props.workout.workoutExercises[prevState.i + 1]
+                    currentWorkoutExercise: this.props.workout.workoutExercises[prevState.i + 1],
+                    workoutLog: {
+                        ...prevState.workoutLog,
+                        workoutExerciseLog: prevState.workoutLog.workoutExerciseLog.concat(completedWorkoutExerciseLog)
+                    }
                 };
             })
         } else {
@@ -135,10 +141,7 @@ class WorkoutExerciseTimer extends React.Component {
         this.state = {
             setNumber: 1,
             workoutExerciseLog: {
-                startDateTime: null,
-                endDateTime: null,
-                exercise: null,
-                workoutExerciseSetLogs: []
+                workoutExerciseSetLogs: [] //todo flatten 1 up
             },
             workoutExerciseSetLog: {
                 startDateTime: null,
@@ -156,7 +159,11 @@ class WorkoutExerciseTimer extends React.Component {
     }
 
     componentWillReceiveProps() {
-        this.setState(() => ({setNumber: 1, workoutExerciseLog:null, workoutExerciseSetLog:null}))
+        this.setState(() => ({
+            setNumber: 1,
+            workoutExerciseLog: null,
+            workoutExerciseSetLog: null
+        }))
         console.log('set started', (new Date()).getTime());
         this.logSetStart();
 
@@ -165,6 +172,7 @@ class WorkoutExerciseTimer extends React.Component {
     logSetStart() {
         this.setState(() => ({workoutExerciseSetLog: {startDateTime: (new Date()).getTime()}}));
     }
+
     logSetEnd() {
         let workoutExerciseSetLog = {
             ...this.state.workoutExerciseSetLog,
@@ -173,14 +181,17 @@ class WorkoutExerciseTimer extends React.Component {
             weight: 10
         };
         // this.setState((prevState) => ({workoutExerciseSetLog: {...prevState.workoutExerciseSetLog, endDateTime: (new Date()).getTime(), reps:this.props.workoutExercise.reps, weight:10}}));
-        this.setState((prevState) => { return{
-            workoutExerciseSetLog: null,
-            workoutExerciseLog: {
-                ...prevState.workoutExerciseLog,
-                workoutExerciseSetLogs: prevState.workoutExerciseLog ? prevState.workoutExerciseLog.workoutExerciseSetLogs.concat(workoutExerciseSetLog) :[workoutExerciseSetLog]
+        this.setState((prevState) => {
+            return {
+                workoutExerciseSetLog: null,
+                workoutExerciseLog: {
+                    ...prevState.workoutExerciseLog,
+                    workoutExerciseSetLogs: prevState.workoutExerciseLog ? prevState.workoutExerciseLog.workoutExerciseSetLogs.concat(workoutExerciseSetLog) : [workoutExerciseSetLog]
+                }
             }
-        }});
+        });
     }
+
     next = () => {
         let isLastSetOfLastExercise = this.props.isLastExercise && this.state.setNumber === this.props.workoutExercise.sets;
         if (!this.state.showTimer && !(isLastSetOfLastExercise)) {
@@ -192,8 +203,12 @@ class WorkoutExerciseTimer extends React.Component {
                 this.setState(() => ({showTimer: false}));
                 console.log('set ended', (new Date()).getTime());
                 this.logSetEnd();
-                let workoutExerciseLog = {}
-                this.props.nextExercise();
+                debugger;
+                let workoutExerciseLog = {
+                    exercise: this.props.workoutExercise.exercise,
+                    workoutExerciseSetLogs: this.state.workoutExerciseLog.workoutExerciseSetLogs
+                }
+                this.props.nextExercise(workoutExerciseLog);
 
             } else {
                 console.log('set started', (new Date()).getTime());
@@ -208,7 +223,6 @@ class WorkoutExerciseTimer extends React.Component {
 
         }
     };
-
 
 
     timerElapsed = () => {

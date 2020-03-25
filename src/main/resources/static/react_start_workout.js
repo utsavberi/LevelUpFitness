@@ -99,16 +99,22 @@ class Workout extends React.Component {
             workout: props.workout,
             i: 0,
             currentWorkoutExercise: props.workout.workoutExercises[0],
-            workoutLog: {}
+            workoutLog: {
+                workoutExerciseLog: []
+            }
         }
     }
 
-    nextExercise = () => {
+    nextExercise = (completedWorkoutExerciseLog) => {
         if (this.state.i != this.props.workout.workoutExercises.length - 1) {
             this.setState((prevState) => {
                 return {
                     i: prevState.i + 1,
-                    currentWorkoutExercise: this.props.workout.workoutExercises[prevState.i + 1]
+                    currentWorkoutExercise: this.props.workout.workoutExercises[prevState.i + 1],
+                    workoutLog: {
+                        ...prevState.workoutLog,
+                        workoutExerciseLog: prevState.workoutLog.workoutExerciseLog.concat(completedWorkoutExerciseLog)
+                    }
                 };
             })
         } else {
@@ -135,10 +141,7 @@ class WorkoutExerciseTimer extends React.Component {
         this.state = {
             setNumber: 1,
             workoutExerciseLog: {
-                startDateTime: null,
-                endDateTime: null,
-                exercise: null,
-                workoutExerciseSetLogs: []
+                workoutExerciseSetLogs: [] //todo flatten 1 up
             },
             workoutExerciseSetLog: {
                 startDateTime: null,
@@ -200,8 +203,12 @@ class WorkoutExerciseTimer extends React.Component {
                 this.setState(() => ({showTimer: false}));
                 console.log('set ended', (new Date()).getTime());
                 this.logSetEnd();
-                let workoutExerciseLog = {}
-                this.props.nextExercise();
+                debugger;
+                let workoutExerciseLog = {
+                    exercise: this.props.workoutExercise.exercise,
+                    workoutExerciseSetLogs: this.state.workoutExerciseLog.workoutExerciseSetLogs
+                }
+                this.props.nextExercise(workoutExerciseLog);
 
             } else {
                 console.log('set started', (new Date()).getTime());
