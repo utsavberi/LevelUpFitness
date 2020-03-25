@@ -33,8 +33,42 @@ class App extends React.Component {
     render() {
         return (
             <div className={"container"}>
-                <Workout workout={jsondata}/>
+                <WorkoutContainer workout={jsondata}/>
             </div>)
+    }
+}
+
+class WorkoutContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            started: false
+        }
+    }
+
+    startWorkout = () => {
+        this.setState(() => ({
+            started: true
+        }));
+    };
+
+    render() {
+        return (<div className={"container"}>
+            {!this.state.started ?
+                <div>
+                    <ul>
+                        {this.props.workout.workoutExercises.map((workoutExercise) => {
+                            return (
+                                <li>{workoutExercise.exercise.name} {workoutExercise.sets}X{workoutExercise.reps} {workoutExercise.restInSeconds}sec  </li>
+                            );
+                        })}
+                    </ul>
+                    <button className={"btn-primary"}
+                            onClick={() => this.startWorkout()}>Start Workout
+                    </button>
+                </div> :
+                <Workout workout={this.props.workout}/>}
+        </div>)
     }
 }
 
@@ -45,7 +79,8 @@ class Workout extends React.Component {
         this.state = {
             workout: props.workout,
             i: 0,
-            currentWorkoutExercise: props.workout.workoutExercises[0]
+            currentWorkoutExercise: props.workout.workoutExercises[0],
+            workoutLog: {}
         }
     }
 
@@ -178,7 +213,9 @@ class TimerContainer extends React.Component {
 
     render() {
         return <div><Timer seconds={this.state.elapsedTimeRemaining}></Timer>
-            <button className={"btn-secondary"} onClick={() => this.resetTimer()}>Skip</button>
+            <button className={"btn-secondary"}
+                    onClick={() => this.resetTimer()}>Skip
+            </button>
         </div>
     }
 }
