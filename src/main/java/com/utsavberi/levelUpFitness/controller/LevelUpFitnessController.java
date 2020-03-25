@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -40,6 +41,14 @@ public class LevelUpFitnessController {
             model.addAttribute("workouts", workouts);
         }
         return "workouts";
+    }
+
+    @RequestMapping(value = "/workout", method = RequestMethod.GET)
+    public String startWorkout(Model model) {
+        Optional<Workout> workout =
+                workoutRepository.findById(1L);
+        workout.ifPresent(value -> model.addAttribute("workout", value));
+        return "startWorkout";
     }
 
     @RequestMapping(value = "/exercises", method = RequestMethod.GET)

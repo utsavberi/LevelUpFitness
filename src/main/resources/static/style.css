@@ -12,3 +12,17 @@
     z-index: 1020;
     width: 100%;
 }
+
+.clock {
+    border: 14px solid #993b3b;
+    border-radius: 48%;
+    position: absolute;
+    top: 16%;
+    width: 45%;
+    height: 23%;
+    text-align: center;
+    background-color: #ccccccb8;
+    box-shadow: 3px 1px 2px #00000091;
+    color: #323232;
+    text-shadow: 1px 2px 2px #000000;
+}

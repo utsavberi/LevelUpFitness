@@ -1,7 +1,5 @@
 package com.utsavberi.levelUpFitness.model;
 
-import com.utsavberi.levelUpFitness.model.Exercise;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -12,15 +10,15 @@ public class Workout {
     private Long id;
     private String name;
     private boolean isCircuit;
-    @ManyToMany
-    private Set<Exercise> exercises;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private Set<WorkoutExercise> workoutExercises;
 
-    public Set<Exercise> getExercises() {
-        return exercises;
+    public Set<WorkoutExercise> getWorkoutExercises() {
+        return workoutExercises;
     }
 
-    public void setExercises(Set<Exercise> exercises) {
-        this.exercises = exercises;
+    public void setWorkoutExercises(Set<WorkoutExercise> exercises) {
+        this.workoutExercises = exercises;
     }
 
 

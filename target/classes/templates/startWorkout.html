@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/base.html :: common_header"></head>
+
+<body>
+<div id="root"></div>
+
+<script th:inline="javascript">
+    var jsondata = [[${workout}]];
+    console.log(jsondata);
+</script>
+
+
+<script type="text/babel">
+    // React code will go here
+</script>
+
+<div id="workout-react-container"></div>
+
+<script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+<script src="react_start_workout.js" type="text/babel"></script>
+
+<div th:replace="fragments/base.html :: common_footer"></div>
+<div th:replace="fragments/base.html :: common_scripts"></div>
+
+</body>
+</html>

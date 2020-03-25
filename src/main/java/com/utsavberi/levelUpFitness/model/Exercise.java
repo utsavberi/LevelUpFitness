@@ -13,16 +13,6 @@ public class Exercise {
     private String description;
     private String imageId;
     private float pointsPerRepPerLbs;
-    @ManyToMany
-    private Set<Workout> workouts;
-
-    public Set<Workout> getWorkouts() {
-        return workouts;
-    }
-
-    public void setWorkouts(Set<Workout> workouts) {
-        this.workouts = workouts;
-    }
 
     public Exercise() {
     }
