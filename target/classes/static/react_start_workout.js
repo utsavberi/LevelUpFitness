@@ -42,13 +42,25 @@ class WorkoutContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            started: false
+            started: false,
+            workoutLog: {}
         }
     }
 
     startWorkout = () => {
         this.setState(() => ({
-            started: true
+            started: true,
+            workoutLogs: {startDateTime: (new Date()).getTime()}
+        }));
+    };
+
+    workoutComplete = () => {
+        this.setState((prevState) => ({
+            completed: true,
+            workoutLogs: {
+                ...prevState.workoutLogs,
+                endDateTime: (new Date()).getTime()
+            }
         }));
     };
 
@@ -59,15 +71,17 @@ class WorkoutContainer extends React.Component {
                     <ul>
                         {this.props.workout.workoutExercises.map((workoutExercise) => {
                             return (
-                                <li>{workoutExercise.exercise.name} {workoutExercise.sets}X{workoutExercise.reps} {workoutExercise.restInSeconds}sec  </li>
+                                <li>{workoutExercise.exercise.name} {workoutExercise.sets}X{workoutExercise.reps} {workoutExercise.restInSeconds}sec </li>
                             );
                         })}
                     </ul>
                     <button className={"btn-primary"}
                             onClick={() => this.startWorkout()}>Start Workout
                     </button>
-                </div> :
-                <Workout workout={this.props.workout}/>}
+                </div> : (!this.state.completed ?
+                    (<Workout workout={this.props.workout}
+                              workoutComplete={this.workoutComplete}/>) : (
+                        <div><h1>Workout Complete</h1></div>))}
         </div>)
     }
 }
@@ -93,18 +107,19 @@ class Workout extends React.Component {
                 };
             })
         } else {
-            this.setState(() => ({workoutComplete: true}));
+            this.props.workoutComplete();
+            // this.setState(() => ({workoutComplete: true}));
         }
 
     };
 
     render() {
         return (<div>
-            {!this.state.workoutComplete ? <WorkoutExerciseTimer
+            {<WorkoutExerciseTimer
                 workoutExercise={this.state.currentWorkoutExercise}
                 nextExercise={this.nextExercise}
                 isLastExercise={this.state.i == this.props.workout.workoutExercises.length - 1}
-            /> : (<h1>Workout Complete</h1>)}
+            />}
         </div>)
     }
 }
