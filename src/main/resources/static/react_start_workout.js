@@ -204,7 +204,8 @@ class Exercise extends React.Component {
                     <ExSet
                         exercise={this.props.workoutExercise.exercise}
                         setNumber={this.state.setNumber}
-                        totalSets={this.props.workoutExercise.sets}
+                        sets={this.props.workoutExercise.sets}
+                        reps={this.props.workoutExercise.reps}
                         restInSeconds={this.props.workoutExercise.restInSeconds}
                         onWorkoutExerciseSetComplete={this.onSetComplete}
                         skipTimer={this.props.isLastExercise && this.state.isLastSet}
@@ -253,7 +254,7 @@ class ExSet extends React.Component {
     onWorkoutExerciseSetComplete = () => {
         this.props.onWorkoutExerciseSetComplete({
             reps: this.props.reps,
-            weight: this.props.weight,
+            weight: 10,//this.props.weight,
             startDateTime: this.state.startDateTime,
             endDateTime: ticks()
         });
@@ -271,7 +272,7 @@ class ExSet extends React.Component {
     };
     exerciseComponent = () => (<div>
         <h1>{this.props.exercise.name}</h1>
-        <h2>Set {this.props.setNumber} of {this.props.totalSets}</h2>
+        <h2>Set {this.props.setNumber} of {this.props.sets}</h2>
         <p>{this.props.exercise.description}</p>
         <button className={"btn-primary"}
                 onClick={this.onNextSetButtonClick}>Next
