@@ -138,7 +138,8 @@ class Exercise extends React.Component {
             <h1>{this.props.exercise.name}</h1>
             <h2>Set {this.props.setNumber} of {this.props.totalSets}</h2>
             <p>{this.props.exercise.description}</p>
-            <button className={"btn-primary"} onClick={this.props.next}>Next</button>
+            <button className={"btn-primary"} onClick={this.props.next}>Next
+            </button>
         </div>)
     }
 }
@@ -163,17 +164,22 @@ class TimerContainer extends React.Component {
     startCountdown = () => {
         this.intervalHandle = setInterval(this.decrement, 1000)
     };
+    resetTimer = () => {
+        clearInterval(this.intervalHandle);
+        this.props.timerElapsed();
+    };
     decrement = () => {
         if (this.state.elapsedTimeRemaining === 0) {
-            clearInterval(this.intervalHandle);
-            this.props.timerElapsed();
+            this.resetTimer();
             return;
         }
         this.setState((prevState) => ({elapsedTimeRemaining: prevState.elapsedTimeRemaining - 1}));
     };
 
     render() {
-        return <Timer seconds={this.state.elapsedTimeRemaining}></Timer>
+        return <div><Timer seconds={this.state.elapsedTimeRemaining}></Timer>
+            <button className={"btn-secondary"} onClick={() => this.resetTimer()}>Skip</button>
+        </div>
     }
 }
 
