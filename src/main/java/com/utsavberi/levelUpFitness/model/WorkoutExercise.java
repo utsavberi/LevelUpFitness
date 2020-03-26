@@ -3,6 +3,7 @@ package com.utsavberi.levelUpFitness.model;
 import org.hibernate.jdbc.Work;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -13,9 +14,9 @@ public class WorkoutExercise {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Exercise exercise;
-
+    @NotNull
     private int sets;
-
+    @NotNull
     private int reps;
 
     private int restInSeconds;

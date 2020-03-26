@@ -1,6 +1,7 @@
 package com.utsavberi.levelUpFitness.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -8,6 +9,7 @@ public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
     private String name;
     private boolean isCircuit;
     @OneToMany(cascade = CascadeType.PERSIST)
