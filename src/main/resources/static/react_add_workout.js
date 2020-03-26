@@ -117,24 +117,28 @@ class AddWorkoutForm extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <button className={'btn-secondary  btn-lg pull-right'}
-                            onClick={() => {
-                                this.addExercise()
-                            }}
-                            disabled={!this.state.exerciseName
-                            || !this.state.sets
-                            || !this.state.reps
-                            || !this.state.rest ? true : false}>
-                        +
-                    </button>
-                </div>
-                <div>
-                    <button className={'btn-primary btn-lg'} onClick={() => {
-                        this.saveWorkout()
-                    }}
-                            disabled={!this.state.workoutName || this.state.exercises.length == 0}>Done
-                    </button>
+                <div className={"row mt-3"}>
+                    <div className={"col-6"}>
+                        <button className={'btn-primary btn-lg'}
+                                onClick={() => {
+                                    this.saveWorkout()
+                                }}
+                                disabled={!this.state.workoutName || this.state.exercises.length == 0}>Done
+                        </button>
+                    </div>
+                    <div className={"col-6"}>
+                        <button className={'btn-secondary  btn-lg pull-right'}
+                                onClick={() => {
+                                    this.addExercise()
+                                }}
+                                disabled={!this.state.exerciseName
+                                || !this.state.sets
+                                || !this.state.reps
+                                || !this.state.rest ? true : false}>
+                            +
+                        </button>
+                    </div>
+
                 </div>
             </div>)
     }

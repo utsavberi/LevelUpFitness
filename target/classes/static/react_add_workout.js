@@ -71,13 +71,6 @@ class AddWorkoutForm extends React.Component {
                        onChange={(e) => {
                            this.setWorkoutName(e.target.value)
                        }}/>
-                {/*<div className={"row"}>*/}
-                {/*    <div className={"col-3"}>name</div>*/}
-                {/*    <div className={"col-3"}>sets</div>*/}
-                {/*    <div className={"col-3"}>reps</div>*/}
-                {/*    <div className={"col-3"}>rest(sec)</div>*/}
-                {/*</div>*/}
-
                 {this.state.exercises.map((e, i) => (
                     <Exercise
                         exerciseName={e.exerciseName}
@@ -124,24 +117,28 @@ class AddWorkoutForm extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <button className={'btn-secondary  btn-lg pull-right'}
-                            onClick={() => {
-                                this.addExercise()
-                            }}
-                            disabled={!this.state.exerciseName
-                            || !this.state.sets
-                            || !this.state.reps
-                            || !this.state.rest ? true : false}>
-                        +
-                    </button>
-                </div>
-                <div>
-                    <button className={'btn-primary btn-lg'} onClick={() => {
-                        this.saveWorkout()
-                    }}
-                            disabled={!this.state.workoutName || this.state.exercises.length == 0}>Done
-                    </button>
+                <div className={"row mt-3"}>
+                    <div className={"col-6"}>
+                        <button className={'btn-primary btn-lg'}
+                                onClick={() => {
+                                    this.saveWorkout()
+                                }}
+                                disabled={!this.state.workoutName || this.state.exercises.length == 0}>Done
+                        </button>
+                    </div>
+                    <div className={"col-6"}>
+                        <button className={'btn-secondary  btn-lg pull-right'}
+                                onClick={() => {
+                                    this.addExercise()
+                                }}
+                                disabled={!this.state.exerciseName
+                                || !this.state.sets
+                                || !this.state.reps
+                                || !this.state.rest ? true : false}>
+                            +
+                        </button>
+                    </div>
+
                 </div>
             </div>)
     }
@@ -159,14 +156,9 @@ class Exercise extends React.Component {
             <div className={"card"}>
                 <div className={"card-body"}>
                     <h5 className={"card-title"}>{this.props.exerciseName} </h5>
-                    {this.props.sets} Sets X {this.props.reps} Reps : {this.props.rest} seconds rest
+                    {this.props.sets} Sets X {this.props.reps} Reps
+                    : {this.props.rest} seconds rest
                 </div>
-
-
-                {/*<div className={"col-3"}>{this.props.exerciseName} </div>*/}
-                {/*<div className={"col-3"}>{this.props.sets} sets X</div>*/}
-                {/*<div className={"col-3"}>{this.props.reps} rep </div>*/}
-                {/*<div className={"col-3"}>{this.props.rest} sec rest</div>*/}
             </div>
         )
     }
