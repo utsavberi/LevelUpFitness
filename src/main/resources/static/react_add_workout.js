@@ -34,7 +34,11 @@ class AddWorkoutForm extends React.Component {
                 sets: prevState.sets,
                 reps: prevState.reps,
                 rest: prevState.rest
-            })
+            }),
+            reps: null,
+            sets: null,
+            rest: null,
+            exerciseName: null
         }));
     };
 
@@ -53,38 +57,87 @@ class AddWorkoutForm extends React.Component {
     setRest = (value) => {
         this.setState(() => ({rest: parseInt(value, 10)}));
     };
+    setWorkoutName = (value) => {
+        this.setState(() => ({workoutName: value}))
+    };
+    saveWorkout = () => {
+
+    }
 
     render() {
         return (
             <div>
-                <input placeholder={'Workout Name'}/>
+                <input placeholder={'Workout Name'} className={'form-control'}
+                       onChange={(e) => {
+                           this.setWorkoutName(e.target.value)
+                       }}/>
                 {this.state.exercises.map((e, i) => (
                     <Exercise
                         exerciseName={e.exerciseName}
                         sets={e.sets}
                         reps={e.reps}
                         rest={e.rest}
-                    />))}
-                <input placeholder={'Exercise Name'} onChange={(e) => {
-                    this.setExerciseName(e.target.value)
-                }}/>
-                <input type="number" placeholder={'Sets'} onChange={(e) => {
-                    this.setSets(e.target.value)
-                }}/>
-                <input type="number" placeholder={'Reps'} onChange={(e) => {
-                    this.setReps(e.target.value)
-                }}/>
-                <input type="number" placeholder={'Rest'} onChange={(e) => {
-                    this.setRest(e.target.value)
-                }}/>
-                <button onClick={() => {
-                    this.addExercise()
-                }}>+
-                </button>
+                    />))
+                }
+                <div className="card">
+                    <div className="card-body">
+                        <div className={"row"}>
+                            <div className={"col-3"}>
+                                <input className={'form-control'}
+                                       placeholder={'Name'}
+                                       value={this.state.exerciseName || ''}
+                                       onChange={(e) => {
+                                           this.setExerciseName(e.target.value)
+                                       }}/>
+                            </div>
+                            <div className={"col-3"}>
+                                <input className={'form-control'} type="number"
+                                       placeholder={'Sets'}
+                                       value={this.state.sets || ''}
+                                       onChange={(e) => {
+                                           this.setSets(e.target.value)
+                                       }}/>
+                            </div>
+                            <div className={"col-3"}>
+                                <input className={'form-control'} type="number"
+                                       placeholder={'Reps'}
+                                       value={this.state.reps || ''}
+                                       onChange={(e) => {
+                                           this.setReps(e.target.value)
+                                       }}/>
+                            </div>
+                            <div className={"col-3"}>
+                                <input className={'form-control'} type="number"
+                                       placeholder={'Rest'}
+                                       value={this.state.rest || ''}
+                                       onChange={(e) => {
+                                           this.setRest(e.target.value)
+                                       }}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button className={'btn-secondary  btn-lg pull-right'}
+                            onClick={() => {
+                                this.addExercise()
+                            }}
+                            disabled={!this.state.exerciseName
+                            || !this.state.sets
+                            || !this.state.reps
+                            || !this.state.rest ? true : false}>
+                        +
+                    </button>
+                </div>
+                <div>
+                    <button className={'btn-primary btn-lg'} onClick={() => {
+                        this.saveWorkout()
+                    }}
+                            disabled={!this.state.workoutName || this.state.exercises.length == 0}>Done
+                    </button>
+                </div>
             </div>)
     }
-
-
 }
 
 class Exercise extends React.Component {
@@ -94,9 +147,16 @@ class Exercise extends React.Component {
     }
 
     render() {
-        return (<div>
-            {this.props.exerciseName} {this.props.set} {this.props.reps} {this.props.interval}
-        </div>)
+        return (
+
+            <div className={"card"}>
+                <div className={"card-body"}>
+                    <h5 className={"card-title"}>{this.props.exerciseName} </h5>
+                    {this.props.sets} Sets X {this.props.reps} Reps
+                    : {this.props.rest} seconds rest
+                </div>
+            </div>
+        )
     }
 }
 
