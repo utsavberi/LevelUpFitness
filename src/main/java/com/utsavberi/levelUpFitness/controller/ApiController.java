@@ -46,8 +46,8 @@ public class ApiController {
         return workoutLogRepository.findAll();
     }
 
-    @PostMapping("/test")
-    public String test(@RequestBody WorkoutLog workoutLog) {
+    @PostMapping("/addWorkoutLog")
+    public String addWorkoutLog(@RequestBody WorkoutLog workoutLog) {
         int x = 1;
         workoutLogRepository.save(workoutLog);
         return "done";

@@ -63,13 +63,13 @@ class WorkoutContainer extends React.Component {
             workoutLog: workoutLog
         }));
         $.ajax({
-            url:"/api/test",
+            url:"/api/addWorkoutLog",
             type:"POST",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(workoutLog), //Stringified Json Object
-            async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
-            cache: false,    //This will force requested pages not to be cached by the browser
-            processData:false, //To avoid making query String instead of JSON
+            data: JSON.stringify(workoutLog),
+            async: false,
+            cache: false,
+            processData:false,
             success: function(resposeJsonObject){
                 // Success Message Handler
                 console.log('done', resposeJsonObject)
@@ -232,17 +232,6 @@ class Exercise extends React.Component {
 }
 
 class ExSet extends React.Component {
-    // props:
-    //     {
-    //         skipTimer:'bool',
-    //         onWorkoutExerciseSetComplete:'callback function'
-    //         exercise:{name, description}
-    //         workoutExercise:{restInSeconds}
-    //         setNumber
-    //         totalSets
-    //         restInSeconds
-    //     }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -352,16 +341,14 @@ class TimerContainer extends React.Component {
     }
 }
 
-class Timer extends React.Component {
-    render() {
-        return (
-            <div>
-                <div className="clock" style={{fontSize: 100, marginLeft: 100}}>
-                    {this.props.seconds}
-                </div>
+function Timer(props) {
+    return (
+        <div>
+            <div className="clock" style={{fontSize: 100, marginLeft: 100}}>
+                {props.seconds}
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 const domContainer =
