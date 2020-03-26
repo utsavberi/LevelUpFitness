@@ -11,7 +11,7 @@ class App extends React.Component {
     render() {
         return (
             <div className={"container"}>
-                <AddWorkoutForm/>
+                <AddWorkoutForm exercisePicklist={jsondata}/>
             </div>
         )
     }
@@ -31,6 +31,7 @@ class AddWorkoutForm extends React.Component {
             numberOfExercises: prevState.numberOfExercises + 1,
             exercises: prevState.exercises.concat({
                 exerciseName: prevState.exerciseName,
+                exerciseId: prevState.exerciseId,
                 sets: prevState.sets,
                 reps: prevState.reps,
                 rest: prevState.rest
@@ -42,8 +43,14 @@ class AddWorkoutForm extends React.Component {
         }));
     };
 
-    setExerciseName = (value) => {
-        this.setState(() => ({exerciseName: value}));
+    setExercise = (value) => {
+        let exercisePicklist = this.props.exercisePicklist;
+        let exercise = exercisePicklist.find(o => o.id === parseInt(value)) || null;
+        this.setState(() => ({
+            exerciseName: exercise ? exercise.name : null,
+            value: value || null,
+            exerciseId: value
+        }));
     };
 
     setSets = (value) => {
@@ -62,7 +69,7 @@ class AddWorkoutForm extends React.Component {
     };
     saveWorkout = () => {
 
-    }
+    };
 
     render() {
         return (
@@ -83,12 +90,19 @@ class AddWorkoutForm extends React.Component {
                     <div className="card-body">
                         <div className={"row"}>
                             <div className={"col-3"}>
-                                <input className={'form-control'}
-                                       placeholder={'Name'}
-                                       value={this.state.exerciseName || ''}
-                                       onChange={(e) => {
-                                           this.setExerciseName(e.target.value)
-                                       }}/>
+                                <select onChange={(e) => {
+                                    this.setExercise(e.target.value)
+                                }}>
+                                    <option>Exercise</option>)
+                                    {this.props.exercisePicklist.map((e, i) => (
+                                        <option value={e.id}>{e.name}</option>))}
+                                </select>
+                                {/*<input className={'form-control'}*/}
+                                {/*       placeholder={'Name'}*/}
+                                {/*       value={this.state.exerciseName || ''}*/}
+                                {/*       onChange={(e) => {*/}
+                                {/*           this.setExerciseName(e.target.value)*/}
+                                {/*       }}/>*/}
                             </div>
                             <div className={"col-3"}>
                                 <input className={'form-control'} type="number"

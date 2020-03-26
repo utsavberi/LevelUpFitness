@@ -65,7 +65,11 @@ public class LevelUpFitnessController {
     @RequestMapping(value = "/addWorkout", method = RequestMethod.GET)
     public String addWorkout(
             Model model) {
-
+        List<Exercise> exercises =
+                exerciseRepository.findAll();
+        if (exercises != null) {
+            model.addAttribute("exercises", exercises);
+        }
         return "addWorkout";
     }
 

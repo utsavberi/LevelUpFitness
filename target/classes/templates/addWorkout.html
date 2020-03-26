@@ -4,6 +4,10 @@
 <body>
 
 <h1 class="m-4">Add Workout</h1>
+<script th:inline="javascript">
+    var jsondata = [[${exercises}]];
+    console.log(jsondata);
+</script>
 
 <div id="add-workout-react-container"></div>
 
