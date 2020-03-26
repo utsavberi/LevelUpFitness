@@ -9,9 +9,9 @@ public class WorkoutExerciseLog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private Set<WorkoutExerciseSetLog> workoutExerciseSetLogs;
-    @OneToOne
+    @OneToOne(cascade={CascadeType.DETACH,CascadeType.REFRESH})
     private Exercise exercise;
     private Timestamp startDateTime;
     private Timestamp endDateTime;
