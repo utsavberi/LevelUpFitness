@@ -47,9 +47,9 @@ public class ApiController {
     }
 
     @PostMapping("/test")
-    public String test(@RequestBody WorkoutLog workoutLog){
-int x = 1;
-workoutLogRepository.save(workoutLog);
+    public String test(@RequestBody WorkoutLog workoutLog) {
+        int x = 1;
+        workoutLogRepository.save(workoutLog);
         return "done";
     }
 
