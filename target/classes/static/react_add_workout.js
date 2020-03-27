@@ -32,6 +32,7 @@ class AddWorkoutForm extends React.Component {
             exercises: prevState.exercises.concat({
                 exerciseName: prevState.exerciseName,
                 exerciseId: prevState.exerciseId,
+                exercise: prevState.exercise,
                 sets: prevState.sets,
                 reps: prevState.reps,
                 rest: prevState.rest
@@ -39,18 +40,25 @@ class AddWorkoutForm extends React.Component {
             reps: null,
             sets: null,
             rest: null,
-            exerciseName: null
+            exerciseName: null,
+            exerciseId: null,
+            exercise: null
         }));
     };
 
     setExercise = (value) => {
         let exercisePicklist = this.props.exercisePicklist;
         let exercise = exercisePicklist.find(o => o.id === parseInt(value)) || null;
-        this.setState(() => ({
-            exerciseName: exercise ? exercise.name : null,
-            value: value || null,
-            exerciseId: value
-        }));
+        if(exercise){
+            this.setState(() => ({
+                exerciseName: exercise ? exercise.name : null,
+                // value: value || null,
+                exerciseId: value,
+                exercise:exercise
+            }));
+        }
+
+
     };
 
     setSets = (value) => {
@@ -68,7 +76,26 @@ class AddWorkoutForm extends React.Component {
         this.setState(() => ({workoutName: value}))
     };
     saveWorkout = () => {
+        debugger;
+        let workout = {
+            name: this.state.workoutName,
+            workoutExercises: this.state.exercises
+        };
+        $.ajax({
+            url:"/api/addWorkout",
+            type:"POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(workout),
+            async: false,
+            cache: false,
+            processData:false,
+            success: function(resposeJsonObject){
+                // Success Message Handler
+                console.log('done', resposeJsonObject)
 
+            }
+        });
+        console.log('w',workout);
     };
 
     render() {
@@ -93,9 +120,11 @@ class AddWorkoutForm extends React.Component {
                                 <select onChange={(e) => {
                                     this.setExercise(e.target.value)
                                 }}>
-                                    <option>Exercise</option>)
+                                    <option>Exercise</option>
+                                    )
                                     {this.props.exercisePicklist.map((e, i) => (
-                                        <option value={e.id}>{e.name}</option>))}
+                                        <option
+                                            value={e.id}>{e.name}</option>))}
                                 </select>
                                 {/*<input className={'form-control'}*/}
                                 {/*       placeholder={'Name'}*/}
@@ -135,6 +164,7 @@ class AddWorkoutForm extends React.Component {
                     <div className={"col-6"}>
                         <button className={'btn-primary btn-lg'}
                                 onClick={() => {
+                                    console.log('cllik');
                                     this.saveWorkout()
                                 }}
                                 disabled={!this.state.workoutName || this.state.exercises.length == 0}>Done

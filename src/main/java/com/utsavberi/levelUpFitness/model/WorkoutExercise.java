@@ -12,7 +12,7 @@ public class WorkoutExercise {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade={CascadeType.DETACH,CascadeType.REFRESH})
     private Exercise exercise;
     @NotNull
     private int sets;

@@ -53,4 +53,11 @@ public class ApiController {
         return "done";
     }
 
+    @PostMapping("/addWorkout")
+    public String addWorkout(@RequestBody Workout workout) {
+        int x = 1;
+        workoutRepository.save(workout);
+        return "done";
+    }
+
 }
