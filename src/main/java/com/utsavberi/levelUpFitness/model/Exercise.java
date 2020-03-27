@@ -15,14 +15,24 @@ public class Exercise {
     private String description;
     private String imageId;
     private float pointsPerRepPerLbs;
+    private String primaryMuscleUsed;
 
     public Exercise() {
     }
 
-    public Exercise(String name, String description, float pointsPerRepPerLbs) {
+    public String getPrimaryMuscleUsed() {
+        return primaryMuscleUsed;
+    }
+
+    public void setPrimaryMuscleUsed(String primaryMuscleUsed) {
+        this.primaryMuscleUsed = primaryMuscleUsed;
+    }
+
+    public Exercise(String name, String description, float pointsPerRepPerLbs, String primaryMuscleUsed) {
         this.name = name;
         this.description = description;
         this.pointsPerRepPerLbs = pointsPerRepPerLbs;
+        this.primaryMuscleUsed = primaryMuscleUsed;
     }
 
     public Long getId() {

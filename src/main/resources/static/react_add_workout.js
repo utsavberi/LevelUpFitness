@@ -35,11 +35,11 @@ class AddWorkoutForm extends React.Component {
                 exercise: prevState.exercise,
                 sets: prevState.sets,
                 reps: prevState.reps,
-                rest: prevState.rest
+                restInSeconds: prevState.restInSeconds
             }),
             reps: null,
             sets: null,
-            rest: null,
+            restInSeconds: null,
             exerciseName: null,
             exerciseId: null,
             exercise: null
@@ -68,8 +68,8 @@ class AddWorkoutForm extends React.Component {
         this.setState(() => ({reps: parseInt(value, 10)}));
     };
 
-    setRest = (value) => {
-        this.setState(() => ({rest: parseInt(value, 10)}));
+    setrestInSeconds = (value) => {
+        this.setState(() => ({restInSeconds: parseInt(value, 10)}));
     };
     setWorkoutName = (value) => {
         this.setState(() => ({workoutName: value}))
@@ -106,7 +106,7 @@ class AddWorkoutForm extends React.Component {
                         exerciseName={e.exerciseName}
                         sets={e.sets}
                         reps={e.reps}
-                        rest={e.rest}
+                        restInSeconds={e.restInSeconds}
                     />))
                 }
                 <div className="card">
@@ -142,10 +142,10 @@ class AddWorkoutForm extends React.Component {
                             </div>
                             <div className={"col-3 p-0"}>
                                 <input className={'form-control'} type="number"
-                                       placeholder={'Rest(sec)'}
-                                       value={this.state.rest || ''}
+                                       placeholder={'restInSeconds(sec)'}
+                                       value={this.state.restInSeconds || ''}
                                        onChange={(e) => {
-                                           this.setRest(e.target.value)
+                                           this.setrestInSeconds(e.target.value)
                                        }}/>
                             </div>
                         </div>
@@ -159,7 +159,7 @@ class AddWorkoutForm extends React.Component {
                                     disabled={!this.state.exerciseName
                                     || !this.state.sets
                                     || !this.state.reps
-                                    || !this.state.rest ? true : false}>
+                                    || !this.state.restInSeconds ? true : false}>
                                     Add
                                 </button>
                             </div>
@@ -195,7 +195,7 @@ class Exercise extends React.Component {
                 <div className={"card-body"}>
                     <h5 className={"card-title"}>{this.props.exerciseName} </h5>
                     {this.props.sets} Sets X {this.props.reps} Reps
-                    : {this.props.rest} seconds rest
+                    : {this.props.restInSeconds} seconds restInSeconds
                 </div>
             </div>
         )

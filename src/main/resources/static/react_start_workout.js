@@ -284,7 +284,7 @@ class ExSet extends React.Component {
     </div>);
 
     timerComponent = () => ((<TimerContainer
-        startCountdownFrom={this.props.restInSeconds / 10}
+        startCountdownFrom={this.props.restInSeconds}
         timerElapsed={this.onTimerElapsed}
     />));
 
