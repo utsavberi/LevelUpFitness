@@ -28,9 +28,9 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         //Push Exercise
-        addPushExercise();
-        addPullExercise();
-        addLegsExercise();
+//        addPushExercise();
+//        addPullExercise();
+//        addLegsExercise();
     }
 
     private void addLegsExercise() {

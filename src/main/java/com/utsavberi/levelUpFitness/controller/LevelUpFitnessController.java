@@ -30,7 +30,7 @@ public class LevelUpFitnessController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
-        return "home";
+        return "template";
     }
 
     @RequestMapping(value = "/workouts", method = RequestMethod.GET)
@@ -62,9 +62,15 @@ public class LevelUpFitnessController {
         return "exercises";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addToReadingList(Exercise exercise) {
-        exerciseRepository.save(exercise);
-        return "redirect:/";
+    @RequestMapping(value = "/addWorkout", method = RequestMethod.GET)
+    public String addWorkout(
+            Model model) {
+        List<Exercise> exercises =
+                exerciseRepository.findAll();
+        if (exercises != null) {
+            model.addAttribute("exercises", exercises);
+        }
+        return "addWorkout";
     }
+
 }

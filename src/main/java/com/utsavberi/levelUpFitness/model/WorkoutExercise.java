@@ -3,6 +3,7 @@ package com.utsavberi.levelUpFitness.model;
 import org.hibernate.jdbc.Work;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -11,11 +12,11 @@ public class WorkoutExercise {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade={CascadeType.DETACH,CascadeType.REFRESH})
     private Exercise exercise;
-
+    @NotNull
     private int sets;
-
+    @NotNull
     private int reps;
 
     private int restInSeconds;
