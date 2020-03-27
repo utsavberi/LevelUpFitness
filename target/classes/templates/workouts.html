@@ -5,10 +5,23 @@
 <h1 class="m-4">Workouts</h1>
 <ul class="list-group">
     <li class="list-group-item" th:each="workout : ${workouts}">
-        <h4 class="card-title" th:text="${workout.name}"></h4>
+        <a th:href="@{/startWorkout(id=${workout.id})}"><h4 class="card-title"
+                                                            th:text="${workout.name}"></h4>
+        </a>
     </li>
 </ul>
 
+
+
+</div>
+<div class="row mt-3">
+    <div class="col-6 pl-4">
+        <button class="btn-primary btn-lg"
+                onclick="window.location.href = '/addWorkout';">
+            Add
+        </button>
+    </div>
+</div>
 <div th:replace="fragments/base.html :: common_footer"></div>
 <div th:replace="fragments/base.html :: common_scripts"></div>
 </body>

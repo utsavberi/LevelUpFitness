@@ -7,8 +7,10 @@ import com.utsavberi.levelUpFitness.repository.WorkoutRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,10 +45,10 @@ public class LevelUpFitnessController {
         return "workouts";
     }
 
-    @RequestMapping(value = "/workout", method = RequestMethod.GET)
-    public String startWorkout(Model model) {
+    @RequestMapping(value = "/startWorkout", method = RequestMethod.GET)
+    public String startWorkout(@RequestParam("id") Long id, Model model) {
         Optional<Workout> workout =
-                workoutRepository.findById(1L);
+                workoutRepository.findById(id);
         workout.ifPresent(value -> model.addAttribute("workout", value));
         return "startWorkout";
     }
