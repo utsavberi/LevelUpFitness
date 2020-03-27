@@ -49,12 +49,11 @@ class AddWorkoutForm extends React.Component {
     setExercise = (value) => {
         let exercisePicklist = this.props.exercisePicklist;
         let exercise = exercisePicklist.find(o => o.id === parseInt(value)) || null;
-        if(exercise){
+        if (exercise) {
             this.setState(() => ({
                 exerciseName: exercise ? exercise.name : null,
-                // value: value || null,
                 exerciseId: value,
-                exercise:exercise
+                exercise: exercise
             }));
         }
 
@@ -81,19 +80,18 @@ class AddWorkoutForm extends React.Component {
             workoutExercises: this.state.exercises
         };
         $.ajax({
-            url:"/api/addWorkout",
-            type:"POST",
+            url: "/api/addWorkout",
+            type: "POST",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(workout),
             async: false,
             cache: false,
-            processData:false,
-            success: function(resposeJsonObject){
+            processData: false,
+            success: function (resposeJsonObject) {
                 window.location.replace("/workouts");
 
             }
         });
-        console.log('w',workout);
     };
 
     render() {
@@ -114,10 +112,11 @@ class AddWorkoutForm extends React.Component {
                 <div className="card">
                     <div className="card-body">
                         <div className={"row"}>
-                            <div className={"col-3"}>
-                                <select onChange={(e) => {
-                                    this.setExercise(e.target.value)
-                                }} value={this.state.exerciseId || ''}>
+                            <div className={"col-3 p-0"}>
+                                <select className={'form-control'}
+                                        onChange={(e) => {
+                                            this.setExercise(e.target.value)
+                                        }} value={this.state.exerciseId || ''}>
                                     <option>Exercise</option>
                                     )
                                     {this.props.exercisePicklist.map((e, i) => (
@@ -125,7 +124,7 @@ class AddWorkoutForm extends React.Component {
                                             value={e.id}>{e.name}</option>))}
                                 </select>
                             </div>
-                            <div className={"col-3"}>
+                            <div className={"col-3 p-0"}>
                                 <input className={'form-control'} type="number"
                                        placeholder={'Sets'}
                                        value={this.state.sets || ''}
@@ -133,7 +132,7 @@ class AddWorkoutForm extends React.Component {
                                            this.setSets(e.target.value)
                                        }}/>
                             </div>
-                            <div className={"col-3"}>
+                            <div className={"col-3 p-0"}>
                                 <input className={'form-control'} type="number"
                                        placeholder={'Reps'}
                                        value={this.state.reps || ''}
@@ -141,13 +140,28 @@ class AddWorkoutForm extends React.Component {
                                            this.setReps(e.target.value)
                                        }}/>
                             </div>
-                            <div className={"col-3"}>
+                            <div className={"col-3 p-0"}>
                                 <input className={'form-control'} type="number"
-                                       placeholder={'Rest'}
+                                       placeholder={'Rest(sec)'}
                                        value={this.state.rest || ''}
                                        onChange={(e) => {
                                            this.setRest(e.target.value)
                                        }}/>
+                            </div>
+                        </div>
+                        <div className={"row mt-3"}>
+                            <div className={'col-12'}>
+                                <button
+                                    className={'btn-secondary  btn-lg pull-right'}
+                                    onClick={() => {
+                                        this.addExercise()
+                                    }}
+                                    disabled={!this.state.exerciseName
+                                    || !this.state.sets
+                                    || !this.state.reps
+                                    || !this.state.rest ? true : false}>
+                                    Add
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -161,18 +175,7 @@ class AddWorkoutForm extends React.Component {
                                 disabled={!this.state.workoutName || this.state.exercises.length == 0}>Done
                         </button>
                     </div>
-                    <div className={"col-6"}>
-                        <button className={'btn-secondary  btn-lg pull-right'}
-                                onClick={() => {
-                                    this.addExercise()
-                                }}
-                                disabled={!this.state.exerciseName
-                                || !this.state.sets
-                                || !this.state.reps
-                                || !this.state.rest ? true : false}>
-                            +
-                        </button>
-                    </div>
+
 
                 </div>
             </div>)
