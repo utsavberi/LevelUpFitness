@@ -76,7 +76,6 @@ class AddWorkoutForm extends React.Component {
         this.setState(() => ({workoutName: value}))
     };
     saveWorkout = () => {
-        debugger;
         let workout = {
             name: this.state.workoutName,
             workoutExercises: this.state.exercises
@@ -90,8 +89,7 @@ class AddWorkoutForm extends React.Component {
             cache: false,
             processData:false,
             success: function(resposeJsonObject){
-                // Success Message Handler
-                console.log('done', resposeJsonObject)
+                window.location.replace("/workouts");
 
             }
         });
@@ -119,19 +117,13 @@ class AddWorkoutForm extends React.Component {
                             <div className={"col-3"}>
                                 <select onChange={(e) => {
                                     this.setExercise(e.target.value)
-                                }}>
+                                }} value={this.state.exerciseId || ''}>
                                     <option>Exercise</option>
                                     )
                                     {this.props.exercisePicklist.map((e, i) => (
                                         <option
                                             value={e.id}>{e.name}</option>))}
                                 </select>
-                                {/*<input className={'form-control'}*/}
-                                {/*       placeholder={'Name'}*/}
-                                {/*       value={this.state.exerciseName || ''}*/}
-                                {/*       onChange={(e) => {*/}
-                                {/*           this.setExerciseName(e.target.value)*/}
-                                {/*       }}/>*/}
                             </div>
                             <div className={"col-3"}>
                                 <input className={'form-control'} type="number"
@@ -164,7 +156,6 @@ class AddWorkoutForm extends React.Component {
                     <div className={"col-6"}>
                         <button className={'btn-primary btn-lg'}
                                 onClick={() => {
-                                    console.log('cllik');
                                     this.saveWorkout()
                                 }}
                                 disabled={!this.state.workoutName || this.state.exercises.length == 0}>Done

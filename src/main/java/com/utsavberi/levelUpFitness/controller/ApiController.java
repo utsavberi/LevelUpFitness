@@ -48,14 +48,12 @@ public class ApiController {
 
     @PostMapping("/addWorkoutLog")
     public String addWorkoutLog(@RequestBody WorkoutLog workoutLog) {
-        int x = 1;
         workoutLogRepository.save(workoutLog);
         return "done";
     }
 
     @PostMapping("/addWorkout")
     public String addWorkout(@RequestBody Workout workout) {
-        int x = 1;
         workoutRepository.save(workout);
         return "done";
     }
