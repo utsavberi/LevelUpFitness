@@ -22,7 +22,8 @@ class AddWorkoutForm extends React.Component {
         super(props);
         this.state = {
             exercises: [],
-            numberOfExercises: 0
+            numberOfExercises: 0,
+            exerciseOrderId: 0
         }
     }
 
@@ -35,14 +36,16 @@ class AddWorkoutForm extends React.Component {
                 exercise: prevState.exercise,
                 sets: prevState.sets,
                 reps: prevState.reps,
-                restInSeconds: prevState.restInSeconds
+                restInSeconds: prevState.restInSeconds,
+                orderId: prevState.exerciseOrderId
             }),
             reps: null,
             sets: null,
             restInSeconds: null,
             exerciseName: null,
             exerciseId: null,
-            exercise: null
+            exercise: null,
+            exerciseOrderId: prevState.exerciseOrderId + 1
         }));
     };
 
@@ -56,8 +59,6 @@ class AddWorkoutForm extends React.Component {
                 exercise: exercise
             }));
         }
-
-
     };
 
     setSets = (value) => {

@@ -2,7 +2,6 @@ package com.utsavberi.levelUpFitness.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Entity
 public class Exercise {
@@ -13,26 +12,57 @@ public class Exercise {
     private String name;
     @Lob
     private String description;
-    private String imageId;
+    private String image;
+    private String primaryMusclesUsed;
+    private String secondaryMusclesUsed;
+    private float basePointsPerRep;
     private float pointsPerRepPerLbs;
-    private String primaryMuscleUsed;
 
     public Exercise() {
     }
 
+    public Exercise(
+            String name,
+            String image,
+            float basePointsPerRep,
+            float pointsPerRepPerLbs
+    ) {
+        this.name = name;
+        this.image = image;
+        this.basePointsPerRep = basePointsPerRep;
+        this.pointsPerRepPerLbs = pointsPerRepPerLbs;
+    }
+
+    public String getPrimaryMusclesUsed() {
+        return primaryMusclesUsed;
+    }
+
+    public void setPrimaryMusclesUsed(String primaryMusclesUsed) {
+        this.primaryMusclesUsed = primaryMusclesUsed;
+    }
+
+    public String getSecondaryMusclesUsed() {
+        return secondaryMusclesUsed;
+    }
+
+    public void setSecondaryMusclesUsed(String secondaryMusclesUsed) {
+        this.secondaryMusclesUsed = secondaryMusclesUsed;
+    }
+
+    public float getBasePointsPerRep() {
+        return basePointsPerRep;
+    }
+
+    public void setBasePointsPerRep(float basePointsPerRep) {
+        this.basePointsPerRep = basePointsPerRep;
+    }
+
     public String getPrimaryMuscleUsed() {
-        return primaryMuscleUsed;
+        return primaryMusclesUsed;
     }
 
     public void setPrimaryMuscleUsed(String primaryMuscleUsed) {
-        this.primaryMuscleUsed = primaryMuscleUsed;
-    }
-
-    public Exercise(String name, String description, float pointsPerRepPerLbs, String primaryMuscleUsed) {
-        this.name = name;
-        this.description = description;
-        this.pointsPerRepPerLbs = pointsPerRepPerLbs;
-        this.primaryMuscleUsed = primaryMuscleUsed;
+        this.primaryMusclesUsed = primaryMuscleUsed;
     }
 
     public Long getId() {
@@ -59,12 +89,12 @@ public class Exercise {
         this.description = description;
     }
 
-    public String getImageId() {
-        return imageId;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageId(String imageId) {
-        this.imageId = imageId;
+    public void setImage(String imageId) {
+        this.image = imageId;
     }
 
     public float getPointsPerRepPerLbs() {

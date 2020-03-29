@@ -276,6 +276,7 @@ class ExSet extends React.Component {
     };
     exerciseComponent = () => (<div>
         <h1>{this.props.exercise.name}</h1>
+        <img className="col-12" src={this.props.exercise.image}/>
         <h2>Set {this.props.setNumber} of {this.props.sets}</h2>
         <p>{this.props.exercise.description}</p>
         <button className={"btn-primary"}

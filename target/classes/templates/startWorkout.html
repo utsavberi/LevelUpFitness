@@ -7,6 +7,7 @@
 
 <script th:inline="javascript">
     var jsondata = [[${workout}]];
+    jsondata.workoutExercises.sort((ex1, ex2) => (ex1.orderId - ex2.orderId))
     console.log(jsondata);
 </script>
 

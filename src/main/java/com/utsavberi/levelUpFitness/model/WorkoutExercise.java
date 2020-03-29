@@ -18,8 +18,8 @@ public class WorkoutExercise {
     private int sets;
     @NotNull
     private int reps;
-
     private int restInSeconds;
+    private int orderId;
 
     public WorkoutExercise(){}
     public WorkoutExercise(Exercise exercise, int sets, int reps, int restInSeconds) {
@@ -27,6 +27,14 @@ public class WorkoutExercise {
         this.sets = sets;
         this.reps = reps;
         this.restInSeconds = restInSeconds;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public Long getId() {
