@@ -4,6 +4,8 @@ import com.utsavberi.levelUpFitness.model.*;
 import com.utsavberi.levelUpFitness.repository.WorkoutLogRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class LevelManager {
     private final float level1Points = 100;
@@ -42,12 +44,14 @@ public class LevelManager {
     private float getPoints() {
         float points = 0.f;
 
-        WorkoutLog workoutLog = workoutLogRepository.findAll().get(0);
-        for (WorkoutExerciseLog workoutExerciseLog : workoutLog.getWorkoutExerciseLogs()) {
-            for (WorkoutExerciseSetLog workoutExerciseSetLog : workoutExerciseLog.getWorkoutExerciseSetLogs()) {
-                Exercise exercise = workoutExerciseLog.getExercise();
-                points += (exercise.getBasePointsPerRep() * workoutExerciseSetLog.getReps()) +
-                        (exercise.getPointsPerRepPerLbs() * workoutExerciseSetLog.getReps() * workoutExerciseSetLog.getWeight());
+        List<WorkoutLog> workoutLogs = workoutLogRepository.findAll();
+        for (WorkoutLog workoutLog : workoutLogs) {
+            for (WorkoutExerciseLog workoutExerciseLog : workoutLog.getWorkoutExerciseLogs()) {
+                for (WorkoutExerciseSetLog workoutExerciseSetLog : workoutExerciseLog.getWorkoutExerciseSetLogs()) {
+                    Exercise exercise = workoutExerciseLog.getExercise();
+                    points += (exercise.getBasePointsPerRep() * workoutExerciseSetLog.getReps()) +
+                            (exercise.getPointsPerRepPerLbs() * workoutExerciseSetLog.getReps() * workoutExerciseSetLog.getWeight());
+                }
             }
         }
         return points;
