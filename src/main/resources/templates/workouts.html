@@ -2,7 +2,7 @@
 <html lang="en">
 <head th:replace="fragments/base.html :: common_header"></head>
 <body>
-<h1 class="m-4">Workouts</h1>
+<h1 >Workouts</h1>
 <ul class="list-group">
     <li class="list-group-item" th:each="workout : ${workouts}">
         <a th:href="@{/startWorkout(id=${workout.id})}"><h4 class="card-title"

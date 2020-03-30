@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/base.html :: common_header"></head>
+<body>
+<a href="#settings" class="nav-link" style="
+    text-align: right;
+    font-size: 6px;
+">
+    <div><i class="fa fa-wrench fa-5x"></i></div>
+</a>
+<div style="
+    text-align: center;
+" class="">
+    <img src="image/logo.png" style="
+    width: 80%;
+">
+</div>
+
+<div class="row" style="text-align: center">
+    <div class="col-6">
+        <a href="workouts">
+            <div><i class="fa fa-heartbeat fa-5x"></i></div>
+            Workouts</a>
+
+        <a href="#contact">
+            <div class="mt-5"><i class="fa fa-calculator fa-5x"></i></div>
+            Measurements
+        </a>
+
+    </div>
+    <div class="col-6">
+        <a href="#about">
+            <div><i class="fa fa-trophy fa-5x"></i></div>
+            Leaderboards</a>
+        <a href="#news">
+            <div class="mt-5"><i class="fa fa-tv fa-5x"></i></div>
+            Dashboards
+        </a></div>
+</div>
+<div id="home-react-container" style="position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding:15px 5px;"></div>
+
+
+</div>
+<div th:replace="fragments/base.html :: common_footer"></div>
+<div th:replace="fragments/base.html :: common_scripts"></div>
+<div th:replace="fragments/base.html :: react_scripts"></div>
+
+<script src="react_home.js" type="text/babel"></script>
+
+</body>
+</html>

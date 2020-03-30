@@ -80,23 +80,23 @@ class WorkoutContainer extends React.Component {
     };
 
     render() {
-        return (<div className={"container"}>
+        return (<div>
             {!this.state.started ?
                 <div>
-                    <ul>
+                    <ul className={'list-group'}>
                         {this.props.workout.workoutExercises.map((workoutExercise) => {
                             return (
-                                <li>{workoutExercise.exercise.name} {workoutExercise.sets}X{workoutExercise.reps} {workoutExercise.restInSeconds}sec </li>
+                                <li className={"list-group-item"}>{workoutExercise.exercise.name} {workoutExercise.sets}X{workoutExercise.reps} {workoutExercise.restInSeconds}sec </li>
                             );
                         })}
                     </ul>
-                    <button className={"btn-primary"}
+                    <button className={"btn-primary btn-lg mt-3"}
                             onClick={() => this.startWorkout()}>Start Workout
                     </button>
                 </div> : (!this.state.completed ?
                     (<Workout workout={this.props.workout}
                               onWorkoutComplete={this.workoutComplete}/>) : (
-                        <div><h1>Workout Complete</h1></div>))}
+                        <div><h2>Workout Complete</h2></div>))}
         </div>)
     }
 }
@@ -275,11 +275,11 @@ class ExSet extends React.Component {
         this.onWorkoutExerciseSetComplete();
     };
     exerciseComponent = () => (<div>
-        <h1>{this.props.exercise.name}</h1>
+        <h2>{this.props.exercise.name}</h2>
         <img className="col-12" src={this.props.exercise.image}/>
         <h2>Set {this.props.setNumber} of {this.props.sets}</h2>
         <p>{this.props.exercise.description}</p>
-        <button className={"btn-primary"}
+        <button className={"btn-primary btn-lg mt-3"}
                 onClick={this.onNextSetButtonClick}>Next
         </button>
     </div>);
@@ -334,10 +334,10 @@ class TimerContainer extends React.Component {
     };
 
     render() {
-        return <div><Timer seconds={this.state.elapsedTimeRemaining}></Timer>
-            <button className={"btn-secondary"}
+        return <div className={"clockContainer"}><Timer seconds={this.state.elapsedTimeRemaining}></Timer>
+            <div className={"p-5"}><button className={"btn-secondary btn-lg btn-block"}
                     onClick={() => this.resetTimer()}>Skip
-            </button>
+            </button></div>
         </div>
     }
 }
@@ -345,7 +345,7 @@ class TimerContainer extends React.Component {
 function Timer(props) {
     return (
         <div>
-            <div className="clock" style={{fontSize: 100, marginLeft: 100}}>
+            <div className="clock" style={{fontSize: '10em'}}>
                 {props.seconds}
             </div>
         </div>

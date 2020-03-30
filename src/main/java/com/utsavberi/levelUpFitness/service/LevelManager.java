@@ -10,7 +10,9 @@ public class LevelManager {
     private final float levelUpFactor = 1.5f;
     private final WorkoutLogRepository workoutLogRepository;
 
-    //level = level1Points * (level ^ levelUpFactor)
+    //points needed for level = level1Points * (level ^ levelUpFactor)
+    //level = (points/level1Points) ^ 1/5
+    // todo needs unit tests
 
     public LevelManager(WorkoutLogRepository workoutLogRepository) {
         this.workoutLogRepository = workoutLogRepository;
@@ -26,7 +28,7 @@ public class LevelManager {
     }
 
     private int getCurrentLevel(float points) {
-        return (int) Math.floor((Math.pow(points, 1 / levelUpFactor) / (level1Points)) * 10);
+        return (int) Math.floor((Math.pow(points / level1Points, 1 / levelUpFactor)));
     }
 
     private int getPrevLevelAt(int currentLevel) {
