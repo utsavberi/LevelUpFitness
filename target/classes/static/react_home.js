@@ -51,10 +51,10 @@ function LevelInfo(props) {
                 valuemax={props.levelInfo.nextLevelAt}
                 />
             <div className="row">
-                <div className="col-3" style={{"font-size":"10px"}}>{props.levelInfo.previousLevelAt}</div>
-                <div className="col-3 text-right border-right"><strong>LEVEL {props.levelInfo.level}</strong></div>
-                <div className="col-3">XP {props.levelInfo.points}</div>
-                <div className="col-3 text-right" style={{"font-size":"10px"}}>{props.levelInfo.nextLevelAt}</div>
+                <div className="col-1" style={{"font-size":"10px"}}>{props.levelInfo.previousLevelAt}</div>
+                <div className="col-5 text-right border-right"><strong>LEVEL {props.levelInfo.level}</strong></div>
+                <div className="col-5">XP {props.levelInfo.points}</div>
+                <div className="col-1 text-right" style={{"font-size":"10px"}}>{props.levelInfo.nextLevelAt}</div>
             </div>
         </div>}
 

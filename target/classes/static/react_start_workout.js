@@ -63,14 +63,14 @@ class WorkoutContainer extends React.Component {
             workoutLog: workoutLog
         }));
         $.ajax({
-            url:"/api/addWorkoutLog",
-            type:"POST",
+            url: "/api/addWorkoutLog",
+            type: "POST",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(workoutLog),
             async: false,
             cache: false,
-            processData:false,
-            success: function(resposeJsonObject){
+            processData: false,
+            success: function (resposeJsonObject) {
                 // Success Message Handler
                 console.log('done', resposeJsonObject)
 
@@ -169,7 +169,7 @@ class Exercise extends React.Component {
             setNumber: 1,
             workoutExerciseSetLogs: [],
             startDateTime: ticks(),
-            isLastSet:false
+            isLastSet: false
         }
     }
 
@@ -178,7 +178,7 @@ class Exercise extends React.Component {
             setNumber: 1,
             workoutExerciseSetLogs: [],
             startDateTime: ticks(),
-            isLastSet:false
+            isLastSet: false
         }));
     };
 
@@ -236,14 +236,16 @@ class ExSet extends React.Component {
         super(props);
         this.state = {
             showTimer: false,
-            startDateTime: ticks()
+            startDateTime: ticks(),
+            reps: props.reps
         }
     }
 
     resetComponent = () => {
         this.setState(() => ({
             showTimer: false,
-            startDateTime: ticks()
+            startDateTime: ticks(),
+            reps: this.props.reps
         }));
     };
 
@@ -257,8 +259,8 @@ class ExSet extends React.Component {
 
     onWorkoutExerciseSetComplete = () => {
         this.props.onWorkoutExerciseSetComplete({
-            reps: this.props.reps,
-            weight: 10,//this.props.weight,
+            reps: this.state.reps,
+            weight: this.state.weight,
             startDateTime: this.state.startDateTime,
             endDateTime: ticks()
         });
@@ -270,19 +272,45 @@ class ExSet extends React.Component {
             this.setState(() => ({showTimer: true}))
         }
     };
-
+    setReps = (value) => {
+        this.setState(() => ({reps: parseInt(value, 10)}));
+    };
+    setWeight = (value) => {
+        this.setState(() => ({weight: parseFloat(value)}));
+    };
     onTimerElapsed = () => {
         this.onWorkoutExerciseSetComplete();
     };
     exerciseComponent = () => (<div>
-        <h2>{this.props.exercise.name}</h2>
-        <img className="col-12" src={this.props.exercise.image}/>
-        <h2>Set {this.props.setNumber} of {this.props.sets}</h2>
-        <p>{this.props.exercise.description}</p>
-        <button className={"btn-primary btn-lg mt-3"}
-                onClick={this.onNextSetButtonClick}>Next
-        </button>
-    </div>);
+            <h2>{this.props.exercise.name}</h2>
+            <img className="col-12" src={this.props.exercise.image}/>
+            <h2>Set {this.props.setNumber} of {this.props.sets}</h2>
+            <p>{this.props.exercise.description}</p>
+            <div className="form-row">
+                <div className="input-group col-6">
+                    <label className="col-12 mb-0 pl-0"> Reps</label>
+                    <input type="number" className="col-12 form-control"
+                           value={this.state.reps || ''}
+                           onChange={(e) => {
+                               this.setReps(e.target.value)
+                           }}/>
+                </div>
+                <div className="input-group col-6"><label
+                    className="col-12 mb-0 pl-0">Weight</label>
+                    <input type="number" className="col-12 form-control"
+                           value={this.state.weight || ''}  onChange={(e) => {
+                        this.setWeight(e.target.value)
+                    }}/>
+                    <div className="input-group-prepend">
+                        <div className="input-group-text">lbs</div>
+                    </div>
+                </div>
+            </div>
+            <button className={"btn-primary btn-lg mt-3"}
+                    onClick={this.onNextSetButtonClick}>Next
+            </button>
+        </div>
+    );
 
     timerComponent = () => ((<TimerContainer
         startCountdownFrom={this.props.restInSeconds}
@@ -334,10 +362,13 @@ class TimerContainer extends React.Component {
     };
 
     render() {
-        return <div className={"clockContainer"}><Timer seconds={this.state.elapsedTimeRemaining}></Timer>
-            <div className={"p-5"}><button className={"btn-secondary btn-lg btn-block"}
-                    onClick={() => this.resetTimer()}>Skip
-            </button></div>
+        return <div className={"clockContainer"}><Timer
+            seconds={this.state.elapsedTimeRemaining}></Timer>
+            <div className={"p-5"}>
+                <button className={"btn-secondary btn-lg btn-block"}
+                        onClick={() => this.resetTimer()}>Skip
+                </button>
+            </div>
         </div>
     }
 }
