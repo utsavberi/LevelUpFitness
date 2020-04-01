@@ -283,7 +283,9 @@ class ExSet extends React.Component {
     };
     exerciseComponent = () => (<div>
             <h2>{this.props.exercise.name}</h2>
-            <img className="col-12" src={this.props.exercise.image}/>
+            <div className={'text-center'}>
+            <img className="col-12 col-md-7" src={this.props.exercise.image}/>
+        </div>
             <h2>Set {this.props.setNumber} of {this.props.sets}</h2>
             <p>{this.props.exercise.description}</p>
             <div className="form-row">
