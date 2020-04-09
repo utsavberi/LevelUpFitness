@@ -10,14 +10,21 @@
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
-
+<div class="p-5">
+    <form th:action="@{/login}" method="post">
+        <div class="form-group"><label> User Name : </label><input
+                class="form-control" type="text" name="username"/></div>
+        <div class="form-group"><label> Password: </label><input
+                class="form-control" type="password" name="password"/></div>
+        <div class="form-group text-center">
+            <input class="btn-primary btn-lg mr-2"
+                   type="submit" value="Sign In"/>
+            <button class="btn-secondary btn-lg">Sign Up</button>
+        </div>
+    </form>
+</div>
 <div th:replace="fragments/base.html :: common_footer"></div>
 <div th:replace="fragments/base.html :: common_scripts"></div>
-
+</div>
 </body>
 </html>
