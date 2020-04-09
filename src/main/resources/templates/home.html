@@ -8,13 +8,7 @@
 ">
     <div><i class="fa fa-wrench fa-5x"></i></div>
 </a>
-<div style="
-    text-align: center;
-" class="">
-    <img src="image/logo.png" style="
-    width: 80%;
-    max-width:500px
-">
+<div th:replace="fragments/base.html :: hero">
 </div>
 
 <div class="row" style="text-align: center">
@@ -49,7 +43,7 @@
 <div th:replace="fragments/base.html :: common_scripts"></div>
 <div th:replace="fragments/base.html :: react_scripts"></div>
 
-<script src="react_home.js" type="text/babel"></script>
+<script src="../public/react_home.js" type="text/babel"></script>
 
 </body>
 </html>

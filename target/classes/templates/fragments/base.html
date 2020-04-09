@@ -20,7 +20,7 @@
           rel="stylesheet"/>
 
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../public/style.css">
 
     <title>Title</title>
 
@@ -28,23 +28,23 @@
 <body>
 
 <div th:fragment="common_footer">
-<!--    <div class="navbar sticky-bottom">-->
-<!--        <a href="workouts" class="nav-link active">-->
-<!--            <div><i class="fa fa-heartbeat fa-5x"></i></div>-->
-<!--            Workouts</a>-->
-<!--        <a href="#news" class="nav-link">-->
-<!--            <div><i class="fa fa-tv fa-5x"></i></div>-->
-<!--            Dashboards</a>-->
-<!--        <a href="#contact" class="nav-link">-->
-<!--            <div><i class="fa fa-calculator fa-5x"></i></div>-->
-<!--            Measurements</a>-->
-<!--        <a href="#about" class="nav-link">-->
-<!--            <div><i class="fa fa-wrench fa-5x"></i></div>-->
-<!--            Settings</a>-->
-<!--        <a href="#about" class="nav-link">-->
-<!--            <div><i class="fa fa-trophy fa-5x"></i></div>-->
-<!--            Leaderboards</a>-->
-<!--    </div>-->
+    <!--    <div class="navbar sticky-bottom">-->
+    <!--        <a href="workouts" class="nav-link active">-->
+    <!--            <div><i class="fa fa-heartbeat fa-5x"></i></div>-->
+    <!--            Workouts</a>-->
+    <!--        <a href="#news" class="nav-link">-->
+    <!--            <div><i class="fa fa-tv fa-5x"></i></div>-->
+    <!--            Dashboards</a>-->
+    <!--        <a href="#contact" class="nav-link">-->
+    <!--            <div><i class="fa fa-calculator fa-5x"></i></div>-->
+    <!--            Measurements</a>-->
+    <!--        <a href="#about" class="nav-link">-->
+    <!--            <div><i class="fa fa-wrench fa-5x"></i></div>-->
+    <!--            Settings</a>-->
+    <!--        <a href="#about" class="nav-link">-->
+    <!--            <div><i class="fa fa-trophy fa-5x"></i></div>-->
+    <!--            Leaderboards</a>-->
+    <!--    </div>-->
 
     <!-- JS files: jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -56,6 +56,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+</div>
+<div th:fragment="hero">
+    <div style="text-align: center;" class="">
+        <img src="../../public/image/logo.png" style=" width: 80%; max-width:500px">
+    </div>
 </div>
 <div th:fragment="common_scripts">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

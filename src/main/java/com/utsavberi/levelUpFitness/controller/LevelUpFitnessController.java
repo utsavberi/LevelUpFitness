@@ -82,4 +82,11 @@ public class LevelUpFitnessController {
         return "home";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(
+            Model model) {
+
+        return "login";
+    }
+
 }
