@@ -6,6 +6,8 @@ import com.utsavberi.levelUpFitness.repository.WorkoutLogRepository;
 import com.utsavberi.levelUpFitness.repository.WorkoutRepository;
 import com.utsavberi.levelUpFitness.service.LevelManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,6 +57,9 @@ public class ApiController {
 
     @PostMapping("/addWorkout")
     public String addWorkout(@RequestBody Workout workout) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) auth.getDetails();
+        workout.setUser(user);
         workoutRepository.save(workout);
         return "done";
     }

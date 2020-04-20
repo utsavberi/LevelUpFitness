@@ -15,6 +15,9 @@ public class Workout {
     @OneToMany(cascade = CascadeType.PERSIST)
     private Set<WorkoutExercise> workoutExercises;
 
+    @ManyToOne
+    private User user;
+
     public Set<WorkoutExercise> getWorkoutExercises() {
         return workoutExercises;
     }
@@ -30,6 +33,14 @@ public class Workout {
 
     public void setCircuit(boolean circuit) {
         isCircuit = circuit;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Workout() {
