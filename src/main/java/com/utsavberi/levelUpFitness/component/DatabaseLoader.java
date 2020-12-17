@@ -117,11 +117,10 @@ public class DatabaseLoader implements CommandLineRunner {
     }
 
     private WorkoutExercise addWorkoutExercise(String name, String description, float pointsPerRepPerLbs) {
-        return new WorkoutExercise();
-//                new WorkoutExercise(addExercise(
-//                        name,
-//                        description,
-//                        pointsPerRepPerLbs, "chest"),3, 10, 60);
+        return new WorkoutExercise(addExercise(
+                        name,
+                        "",
+                        1,pointsPerRepPerLbs), 3 , 10, 60);
     }
 
     private Exercise addExercise(
